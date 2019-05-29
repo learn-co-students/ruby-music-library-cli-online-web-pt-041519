@@ -22,4 +22,12 @@ module Concerns
       all.clear
     end
   end
+
+  module MemorableInstance
+    # Save instance of self to @@all array
+    def save
+      self.class.all << self
+    end
+  end
+
 end

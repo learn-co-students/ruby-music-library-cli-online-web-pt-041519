@@ -3,6 +3,7 @@ require 'pry'
 class Song
   extend Concerns::Findable
   extend Concerns::Memorable
+    include Concerns::MemorableInstance
 
   attr_accessor :name
   attr_reader :artist, :genre
@@ -37,11 +38,6 @@ class Song
   # Read @@all array
   def self.all
     @@all
-  end
-
-  # Save instance of self to @@all array
-  def save
-    @@all << self
   end
 
   # Custom class constructor with name, artist, genre that saves instance to @@all

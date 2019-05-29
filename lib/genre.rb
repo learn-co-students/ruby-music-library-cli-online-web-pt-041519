@@ -3,6 +3,7 @@ require 'pry'
 class Genre
   extend Concerns::Findable
   extend Concerns::Memorable
+  include Concerns::MemorableInstance
 
   attr_accessor :name
   attr_reader :songs
@@ -20,11 +21,6 @@ class Genre
     @@all
   end
 
-  # Save instance of self to @@all array
-  def save
-    @@all << self
-  end
-
   # Add song to genre
   def add_song(song)
     # Add song to @songs if it doesn't already exist
@@ -34,9 +30,9 @@ class Genre
     save
   end
 
-  # Return collection of all artists
+  # Return collection of all artists; go through songs to get artists
   def artists
-    songs.collect { |song| song.artist }.uniq
+    @songs.collect { |song| song.artist }.uniq
   end
 
 end

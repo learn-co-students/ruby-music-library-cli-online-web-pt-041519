@@ -39,9 +39,9 @@ class Artist
     @songs
   end
 
-  # Return array of all artist's song genres
+  # Return array of all artist's genres through songs
   def genres
-    songs.collect { |song| song.genre }.uniq
+    @songs.collect { |song| song.genre }.uniq
   end
 
 end
