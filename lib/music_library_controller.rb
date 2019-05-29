@@ -1,3 +1,4 @@
+require "pry"
 class MusicLibraryController
 
   def initialize(path = './db/mp3s')
@@ -16,23 +17,25 @@ class MusicLibraryController
         puts "To play a song, enter 'play song'."
         puts "To quit, type 'exit'."
         puts "What would you like to do?"
-        user_input = gets.strip
+        user_input = gets.chomp
 
         case user_input
         when "list songs"
-            self.list_songs
+          self.list_songs
         when "list artists"
-            self.list_artists
+          self.list_artists
         when "list genres"
-            self.list_genres
+          self.list_genres
         when "list artist"
-            self.list_songs_by_artist
+          self.list_songs_by_artist
         when "list genre"
-            self.list_songs_by_genre
+          self.list_songs_by_genre
         when "play song"
-            self.play_song
+          self.play_song
         end
+      end
     end
+
     def list_songs
         Song.all.sort_by(&:name).each_with_index do |song, index|
             puts "#{index+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
@@ -53,7 +56,7 @@ class MusicLibraryController
 
     def list_songs_by_artist
         puts "Please enter the name of an artist:"
-        artist_name = gets.strip
+        artist_name = gets.chomp
         artist = Artist.find_by_name(artist_name)
         if artist
             songs = artist.songs.sort_by(&:name)
@@ -72,16 +75,16 @@ class MusicLibraryController
     end
 
     def play_song
-        puts "Which song number would you like to play?"
-        song_number = gets.strip.to_i
+      puts "Which song number would you like to play?"
+       song_number = gets.strip.to_i
         if (1..Song.all.length).include?(song_number)
           song = Song.all.sort{|artist, song|artist.name <=> song.name}[song_number -1]
         end
-          puts "Playing #{song.name} by #{song.artist.name}" if song 
+          puts "Playing #{song.name} by #{song.artist.name}" if song
             # song_name = Song.all.sort_by(&:name)[song_number-1].name
             # artist_name = Song.all.sort_by(&:name)[song_number-1].artist.name
             #puts "Playing #{song_name} by #{artist_name}"
         #end
     end
+
   end
-end

@@ -5,12 +5,6 @@ module Concerns::Findable
   end
 
   def find_or_create_by_name(name)
-    return find_by_name(name) if find_by_name(name)
-    create(name)
+    self.find_by_name(name) || self.create(name)
   end
-    #  match = self.all.detect{|a| a.name == name}
-    # if match == nil
-    #    match = self.new(name)
-    # end
-    # match
 end

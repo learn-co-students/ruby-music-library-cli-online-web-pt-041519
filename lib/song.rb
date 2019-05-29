@@ -1,31 +1,19 @@
 class Song
   extend Concerns::Findable
-  attr_accessor :name, :artist, :genre
+  extend Concerns::Persistable::ClassMethods
+  include Concerns::Persistable::InstanceMethods
 
+  attr_accessor :name, :artist, :genre
   @@all = []
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
-    self.artist = artist if artist != nil
-    self.genre = genre if genre != nil
-  end
-
-  def save
-    @@all << self
+    self.artist = artist if artist #!= nil
+    self.genre = genre if genre #!= nil
   end
 
   def self.all
     @@all
-  end
-
-  def self.destroy_all
-    self.all.clear
-  end
-
-  def self.create(song_name)
-    song = Song.new(song_name)
-    song.save
-    song
   end
 
   def artist=(artist)
