@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require 'irb'
+require_relative '../config/environment'
+
+def reload!
+  load 'bin/console'
+end
+
+puts "...loading your CLI Environment"
+
+IRB.start
