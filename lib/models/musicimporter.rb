@@ -9,4 +9,9 @@ class MusicImporter
     Dir.entries(file_path).select {|f| !File.directory? f}
   end
   
-end
+  def import
+    files.each do |file_name| 
+      Song.create_from_filename(file_name)
+    end 
+  end
+end #end class
