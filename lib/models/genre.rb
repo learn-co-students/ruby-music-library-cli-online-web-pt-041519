@@ -1,8 +1,10 @@
+
 require_relative '../concerns/concerns.rb'
 class Genre
   attr_accessor :artist, :song, :name
   @@all = []
   extend Concerns::Findable
+
   def initialize(name)
     @name = name
     @songs = []

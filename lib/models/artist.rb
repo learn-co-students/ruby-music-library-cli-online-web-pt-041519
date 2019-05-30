@@ -1,9 +1,13 @@
+
 require_relative '../concerns/concerns.rb'
+
 class Artist
   attr_accessor :name, :song, :genre
   @@all = []
   
+
   extend Concerns::Findable
+
   def initialize(name)
     @name = name
     @songs = []
@@ -42,7 +46,6 @@ class Artist
   
   def self.create(art_name)
     self.new(art_name)
-    self
   end
   
   def add_song(song)
