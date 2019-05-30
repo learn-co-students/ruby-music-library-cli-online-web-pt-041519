@@ -57,5 +57,8 @@ class Song
     Song.new(file_array[1], artist, genre)
   end
   
+  def self.create_from_filename(filename)
+    self.new_from_filename(filename)
+  end
   
 end
