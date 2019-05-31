@@ -1,3 +1,4 @@
+require 'pry'
 require "spec_helper"
 
 describe "MusicLibraryController - CLI Methods" do
@@ -16,6 +17,7 @@ describe "MusicLibraryController - CLI Methods" do
     end
 
     it "is not hard-coded" do
+      # binding.pry
       expect($stdout).to receive(:puts).with("1. Bob Dylan - Ballad of a Thin Man - folk")
       expect($stdout).to receive(:puts).with("2. Alpha 9 - Bliss - trance")
       expect($stdout).to receive(:puts).with("3. Cass McCombs - County Line - indie")

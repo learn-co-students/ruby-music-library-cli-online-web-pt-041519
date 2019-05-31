@@ -8,7 +8,6 @@ class Genre
   def initialize(name)
     @name = name
     @songs = []
-    save
   end
   
   def save 
@@ -37,7 +36,7 @@ class Genre
   end
   
   def self.create(type)
-    self.new(type)
+    self.new(type).tap{|gen| gen.save}
   end
   
   def add_song(song)

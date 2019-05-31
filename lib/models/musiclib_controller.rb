@@ -51,10 +51,54 @@ class MusicLibraryController
     end
   end 
   
-  # def list_artists
-  #   # Artist.all.sort{|a, b| a.name <=> b.name }.each.with_index do |song, index|
-  #   # puts "#{index+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
-  # end
-  # end
+  def list_artists
+    Artist.all.sort{|a, b| a.name <=> b.name }.each.with_index do |artist, index|
+      puts "#{index+1}. #{artist.name}"
+    end
+  end
   
+  def list_genres
+    Genre.all.sort{|a, b| a.name <=> b.name }.each.with_index do |genre, index|
+      puts "#{index+1}. #{genre.name}"
+    end
+  end
+  
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    user_artist = gets.chomp
+    if artist_object = Artist.find_by_name(user_artist)
+      artist_object.songs.sort{|a, b| a.name <=> b.name }.each.with_index do |song, index|
+        puts "#{index+1}. #{song.name} - #{song.genre.name}"
+      end 
+    end
+  end
+  
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+    user_genre = gets.chomp
+    if genre_object = Genre.find_by_name(user_genre)
+      genre_object.songs.sort{|a, b| a.name <=> b.name }.each.with_index do |song, index|
+        puts "#{index+1}. #{song.artist.name} - #{song.name}"
+      end 
+    end
+  end
+  
+  def play_song
+    list_songs
+    puts "Which song number would you like to play?"
+    #list_songs
+    user_song = gets.chomp.to_i
+    if user_song > 0 && user_song <= Song.all.length
+      sorted_array = Song.all.sort{|a,b| a.name <=> b.name}
+      selection = sorted_array[user_song-1]
+      #song = Song.all.sort{|a,b| a.name <=> b.name}[user_song-1]
+      puts "Playing #{selection.name} by #{selection.artist.name}"
+    else
+      play_song
+    
+    end
+    
+  end 
 end #end class
+
+#binding.pry

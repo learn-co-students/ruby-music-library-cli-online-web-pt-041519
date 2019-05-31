@@ -52,7 +52,6 @@ class Song
 	end
 
   def self.new_from_filename(filename)
-    # binding.pry
     file_array = filename.split(" - ")
     artist = Artist.find_or_create_by_name(file_array[0])
     genre = Genre.find_or_create_by_name(file_array[2].chomp(".mp3"))

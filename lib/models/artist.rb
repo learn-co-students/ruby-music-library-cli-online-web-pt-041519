@@ -11,7 +11,6 @@ class Artist
   def initialize(name)
     @name = name
     @songs = []
-    save
   end
   
   def save 
@@ -45,7 +44,7 @@ class Artist
   end
   
   def self.create(art_name)
-    self.new(art_name)
+    self.new(art_name).tap{|art| art.save}
   end
   
   def add_song(song)

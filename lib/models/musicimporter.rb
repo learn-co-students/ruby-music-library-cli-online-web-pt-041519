@@ -5,8 +5,8 @@ class MusicImporter
   end
   
   def files
-    file_path = "./spec/fixtures/mp3s"
-    Dir.entries(file_path).select {|f| !File.directory? f}
+    # file_path = "./spec/fixtures/mp3s"
+    Dir.entries(@path).select {|f| !File.directory? f}
   end
   
   def import
