@@ -9,7 +9,6 @@ class Artist
   include Concerns::Persistable::InstanceMethods
 
   attr_accessor :name, :songs
-  @@all = []
 
   def self.all
     @@all

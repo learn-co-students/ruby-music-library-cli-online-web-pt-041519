@@ -8,6 +8,10 @@ module Concerns::Persistable
   end
 
   module ClassMethods
+    
+    def self.extended(base)
+      base.class_variable_set(:@@all, [])
+    end
 
     def create(object_name)
       self.new(object_name).tap(&:save)
