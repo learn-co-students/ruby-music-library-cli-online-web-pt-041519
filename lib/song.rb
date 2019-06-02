@@ -25,11 +25,8 @@ class Song
       @@all.clear
    end
 
-   def self.create(song_name)
-      song = Song.new(song_name)
-      song.save
-      song
-      # binding.pry
+   def self.create(name)
+      self.new(name).tap(&:save)
    end
   
    def artist=(artist)

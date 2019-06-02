@@ -5,7 +5,7 @@ class Artist
    extend Concerns::Findable
 
    attr_accessor :name, :song
-   attr_reader :genres
+   attr_reader :genre
 
    @@all = []
 
@@ -23,7 +23,7 @@ class Artist
       # binding.pry
    end
 
-   def add_song(song) 
+   def add_song(song)
       song.artist = self if !song.artist
       @songs << song if !songs.include?(song) 
    end
@@ -41,11 +41,7 @@ class Artist
       @@all.clear
    end
 
-   def self.create(artist_name)
-      self.new(artist_name).tap(&:save)
-      # artist = Artist.new(artist_name)
-      # artist.save
-      # artist
-      # binding.pry
+   def self.create(name)
+      self.new(name).tap(&:save)
    end
 end

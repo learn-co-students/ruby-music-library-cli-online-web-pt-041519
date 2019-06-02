@@ -86,7 +86,7 @@ class MusicLibraryController
       puts "Please enter the name of a genre:"
       genre_name = gets.strip
 
-     genre = Genre.find_by_name(genre_name)
+      genre = Genre.find_by_name(genre_name)
 
      if genre
       songs = genre.songs.sort_by(&:name)
@@ -94,17 +94,17 @@ class MusicLibraryController
      end
    end
 
-   def play_song
-      puts "Which song number would you like to play?"
+      def play_song
+         puts "Which song number would you like to play?"
 
-      song_number = gets.strip.to_i
-      
-      if (1..Song.all.length).include?(song_number)
-         song_name = Song.all.sort_by(&:name)[song_number - 1].name
-         artist_name = Song.all.sort_by(&:name)[song_number - 1].artist.name
-         puts "Playing #{song_name} by #{artist_name}"
+         song_number = gets.strip.to_i
+         
+         if (1..Song.all.length).include?(song_number)
+            song_name = Song.all.sort_by(&:name)[song_number - 1].name
+            artist_name = Song.all.sort_by(&:name)[song_number - 1].artist.name
+            puts "Playing #{song_name} by #{artist_name}"
+         end
       end
-   end
 
    end
 end

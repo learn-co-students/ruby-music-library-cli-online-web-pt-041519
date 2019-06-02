@@ -3,7 +3,7 @@ require "pry"
 class Genre
    extend Concerns::Findable
 
-   attr_accessor :name, :songs
+   attr_accessor :name, :song
    @@all = []
 
    def initialize(name)
@@ -33,10 +33,7 @@ class Genre
       @@all.clear
    end
 
-   def self.create(genre_name)
-      genre = Genre.new(genre_name)
-      genre.save
-      genre
-      # binding.pry
+   def self.create(name)
+      self.new(name).tap(&:save)
    end
 end
