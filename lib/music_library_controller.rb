@@ -6,7 +6,7 @@ class MusicLibraryController
 
   def call
     user_input = ""
-    until user_input == "exit"
+    until user_input == 'exit'
     puts "Welcome to your music library!"
     puts "To list all of your songs, enter 'list songs'."
     puts "To list all of the artists in your library, enter 'list artists'."
@@ -18,17 +18,18 @@ class MusicLibraryController
     puts "What would you like to do?"
     user_input = gets.strip
 
-    case user_input
-      when user_input == 'list songs'
+      if user_input == 'list songs'
         self.list_songs
-      when user_input == 'list artists'
+      elsif user_input == 'list artists'
         self.list_artists
-      when user_input == 'list genres'
+      elsif user_input == 'list genres'
         self.list_genres
-      when user_input == 'list artist'
+      elsif user_input == 'list artist'
         self.list_songs_by_artist
-      when user_input == 'list genre'
+      elsif user_input == 'list genre'
         self.list_songs_by_genre
+      elsif user_input == 'play song'
+        self.play_song
       end
     end
   end
