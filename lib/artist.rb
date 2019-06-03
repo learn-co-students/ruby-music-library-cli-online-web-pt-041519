@@ -1,9 +1,9 @@
 require 'pry'
 
 class Artist
-  extend Findable::Class Methods
-  extend Persistable::ClassMethods
-  include Persistable::InstanceMethods
+  extend Concerns::Findable
+  extend Concerns::Persistable::ClassMethods
+  include Concerns::Persistable::InstanceMethods
   
   attr_accessor :name, :songs
   @@all = []
@@ -34,6 +34,7 @@ class Artist
     
     if !@songs.include?(song)
       @songs << song
+      binding.pry
     end
   end
   

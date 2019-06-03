@@ -1,8 +1,8 @@
 require 'pry'
 class Song
-  extend Findable::ClassMethods
-  extend Persistable::ClassMethods
-  include Persistable::InstanceMethods
+  extend Concerns::Findable
+  extend Concerns::Persistable::ClassMethods
+  include Concerns::Persistable::InstanceMethods
   
   attr_accessor :name
   @@all = []
@@ -49,20 +49,16 @@ class Song
     end
   end
   
-  def self.find_by_name(name)
-    self.all.detect { |song| song.name == name}
+  def self.new_from_filename(filename)
+    split_filename = filename.split(/ - |(.mp3)/)
+    new_or_existing_genre = Genre.find_or_create_by_name(split_filename[2])
+    new_or_existing_artist = Artist.find_or_create_by_name(split_filename[0])
+    song_instance = self.new(split_filename[1], new_or_existing_artist, new_or_existing_genre)
+    song_instance
   end
   
-  def self.find_or_create_by_name(name)
-    finder = self.find_by_name(name)
-    if !finder
-      self.create(name)
-    else
-      return finder
-    end
+  def self.create_from_filename(filename)
+    self.new_from_filename(filename).save
   end
-  
-  
-  
   
 end

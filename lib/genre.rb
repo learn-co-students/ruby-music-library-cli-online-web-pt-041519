@@ -1,7 +1,7 @@
 class Genre
-  extend Findable::ClassMethods
-  extend Persistable::ClassMethods
-  include Persistable::InstanceMethods
+  extend Concerns::Findable
+  extend Concerns::Persistable::ClassMethods
+  include Concerns::Persistable::InstanceMethods
   
   attr_accessor :name
   @@all = []
