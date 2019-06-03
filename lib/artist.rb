@@ -4,10 +4,11 @@ class Artist
 
     @@all = []
 
-    attr_accessor :name
+    attr_accessor :name, :songs
 
     def initialize(name)
         @name = name
+        @songs = []
     end    
 
     def self.all
@@ -33,6 +34,11 @@ class Artist
 
         Artist.new(artist).tap(&:save)
     end  
+
+    def add_song(song)
+        song.artist = self if song.artist == nil
+        songs << song if !@songs.include?(song)
+    end    
       
 end
 
