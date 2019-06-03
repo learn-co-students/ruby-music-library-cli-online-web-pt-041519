@@ -23,34 +23,27 @@ class MusicLibraryController
   end
   
   def list_songs
-    counter = 1
-    songs_array = @importer.collect do |song|
-      song.split(" - ")
-    end
-    sorted = songs_array.sort {|a, b| a[1][0] <=> b[1][0]}
-    
-    sorted.collect do |song|
-      song.unshift("#{counter}.")
-      counter += 1
-    end
-    
-    nompthree = sorted.collect do |song|
-      song[3].gsub!(/(.mp3)/, "")
-      song[1] = song[0] + " " + song[1]
-      song
-    end
-  
-    dropped = nompthree.collect do |song|
-      song.drop(1)
+    counter = 0
+    song_library = Song.all.collect do |song|
+      [song.artist.name, song.name, song.genre.name]
     end
 
-    withhyphen = dropped.collect do |song|
+    sorted = song_library.sort {|a, b| a[1][0] <=> b[1][0]}
+    
+    binding.pry
+    numbered = sorted.collect do |song|
+      counter += 1
+      ["#{counter}. " + song[0], song[1..-1]].flatten
+    end
+
+    final_list = numbered.collect do |song|
       song.join(" - ")
     end
 
-    withhyphen.flatten.each do |song|
+    final_list.each do |song|
       puts song
     end
+    
   
   end
   
