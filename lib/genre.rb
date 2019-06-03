@@ -19,7 +19,7 @@ class Genre
   end
 
   def self.destroy_all
-    @@all.clear
+    self.all.clear
   end
 
   def save
@@ -30,10 +30,8 @@ class Genre
     self.new(genre_type).tap(&:save)
   end
 
-  ## returns a collection of artists for all the of genre's songs, no dupplicate genres
   def artists
     songs.map{|song| song.artist}.uniq
   end
-
 
 end

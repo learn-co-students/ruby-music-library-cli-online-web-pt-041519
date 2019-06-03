@@ -13,7 +13,6 @@ class MusicImporter
     Dir.entries(path).select {|entry| entry.include? (".mp3")}
   end
 
-    ##invoke Song.create_from_filename to import files into the library
   def import
     files.each{|file| Song.create_from_filename(file)}
   end
