@@ -31,13 +31,12 @@ class Artist
   end
 
   def add_song(song)
-    @songs << song if !@songs.include?(song)
-    song.artist = self if !song.artist
+    @songs << song unless @songs.include?(song)
+    song.artist = self unless song.artist
   end
 
-  ## return a collection of genres for all of the artist's songs, no dupluicate genres
   def genres
-    songs.map {|song| song.genre}.uniq
+    songs.map(&:genre).uniq
   end
 
 end
