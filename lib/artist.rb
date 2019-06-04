@@ -1,46 +1,54 @@
 require 'pry'
+require_relative './concerns/findable.rb'
 
 class Artist
+  extend Concerns::Findable
+  attr_accessor :name, :songs
 
-    @@all = []
+  @@all = []
 
-    attr_accessor :name, :songs
+  def initialize(name)
+    @name = name
+    @songs = []
+  end
 
-    def initialize(name)
-        @name = name
-        @songs = []
-    end    
+  def self.all
+    @@all
+  end
 
-    def self.all
-        @@all
-    end 
-    
-    def self.destroy_all
-        @@all.clear
+  def self.destroy_all
+    @@all.clear
+  end
+
+  def save
+    @@all << self
+  end
+
+  def self.create(name)
+    Artist.new(name).tap do |name|
+      name.save
     end
+  end
 
-    def save 
-        @@all << self
-    end   
-    
-    def self.create(artist)
-        # song = Song.new(track)
-        # song.save
-        # song
+  def songs
+    @songs
+  end
 
-        # Song.new(track).tap do |song| 
-        # song.save
-        # end
+  def genres #returns a collection of genres for all of the artist's songs
+    songs.collect { |song| song.genre}.uniq
+  end
 
-        Artist.new(artist).tap(&:save)
-    end  
+# Add song to artist
+  def add_song(song_title)
+    #adds the song to the current artist's 'songs' collection = @songs
+     #does not add the song to the current artist's collection of songs if it already exists therein
+     songs << song_title if !songs.detect{|song| song == song_title}
 
-    def add_song(song)
-        song.artist = self if song.artist == nil
-        songs << song if !@songs.include?(song)
-    end    
-      
+
+    #assigns the current artist to the song's 'artist' property (song belongs to artist)
+     #does not assign the artist if the song already has an artist
+
+    song_title.artist = self if song_title.artist == nil
+  end
+
 end
-
-
- 
