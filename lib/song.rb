@@ -4,7 +4,8 @@ class Song
   include Concerns::Persistable::InstanceMethods
 
   attr_accessor :name, :artist, :genre
-
+  @@all = []
+  
   def initialize(name, artist = nil, genre = nil)
     @name = name
     self.artist = artist if artist
